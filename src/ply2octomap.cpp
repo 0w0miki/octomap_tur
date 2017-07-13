@@ -2,24 +2,28 @@
 #include <assert.h>
 
 //pcl
-#include <pcl/io/pcd_io.h>
+#include <pcl/io/ply_io.h>
 #include <pcl/point_types.h>
+#include <pcl/console/parse.h>
+#include <pcl/console/time.h>
 
 //octomap 
 #include <octomap/octomap.h>
 using namespace std;
 
+
+
 int main( int argc, char** argv )
 {
     if (argc != 3)
     {
-        cout<<"Usage: pcd2octomap <input_file> <output_file>"<<endl;
+        cout<<"Usage: pcl2octomap <input_file> <output_file>"<<endl;
         return -1;
     }
 
     string input_file = argv[1], output_file = argv[2];
     pcl::PointCloud<pcl::PointXYZRGBA> cloud;
-    pcl::io::loadPCDFile<pcl::PointXYZRGBA> ( input_file, cloud );
+    pcl::io::loadPLYFile<pcl::PointXYZRGBA> ( input_file, cloud );
 
     cout<<"point cloud loaded, piont size = "<<cloud.points.size()<<endl;
 
